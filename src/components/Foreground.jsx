@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import Cards from "./Cards";
-import DeleteArea from "./DeleteArea";
 function Foreground() {
   const ref = useRef(null);
   let count = 0;
@@ -11,25 +10,25 @@ function Foreground() {
   };
   const data = [
     {
-      id : generateID(),
+      id: generateID(),
       desc: "lorem ipsum dolor got lots of work to do but dont have time to do so ill lock myself up in a room",
       filesize: "edit",
       close: true,
-      tag: { isOpen: true, tagTitle: "Completed Now"},
+      tag: { isOpen: true, tagTitle: "Completed Now" },
     },
     {
-      id : generateID(),
+      id: generateID(),
       desc: "lorem ipsum dolor got lots of work to do but dont have time to do so ill lock myself up in a room",
       filesize: "edit",
       close: true,
-      tag: { isOpen: true, tagTitle: "Incomplete"},
+      tag: { isOpen: true, tagTitle: "Incomplete" },
     },
     {
-      id : generateID(),
+      id: generateID(),
       desc: "lorem ipsum dolor got lots of work to do but dont have time to do so ill lock myself up in a room",
       filesize: "edit",
       close: true,
-      tag: { isOpen: true, tagTitle: "In Progress"},
+      tag: { isOpen: true, tagTitle: "In Progress" },
     },
   ];
 
@@ -39,9 +38,8 @@ function Foreground() {
       className="fixed top-0 left-0 z-[3] w-full h-full flex gap-10 p-5 flex-wrap"
     >
       {data.map((item, index) => (
-        <Cards key ={item.id} data={item} reference={ref} />
+        <Cards key={item.id} data={item} reference={ref} />
       ))}
-      <DeleteArea />
     </div>
   );
 }
