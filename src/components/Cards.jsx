@@ -4,12 +4,11 @@ import { LuDownload } from "react-icons/lu";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react";
 function Cards({ reference, cards, onDelete }) {
-  
   let desc = "Enter Text";
 
   // Hooks ong
   const [status, setStatus] = useState("Incomplete");
-  const [description, setDescription] = useState(desc);
+  const [description, setDescription] = useState("Enter Text");
   const [isEditing, setIsEditing] = useState(false);
   const descriptionRef = useRef(null);
 
@@ -64,6 +63,9 @@ function Cards({ reference, cards, onDelete }) {
   // Starts editing
   const handleEditStart = () => {
     setIsEditing(true);
+    if (description === "Enter Text") {
+      setDescription("");
+    }
   };
 
   // Stops editing
@@ -110,7 +112,7 @@ function Cards({ reference, cards, onDelete }) {
           textDecoration: isEditing ? "underline" : "none",
         }}
       >
-        {desc}
+        {description}
       </p>
       <div className="footer absolute bottom-0 w-full left-0">
         <div className="flex items-center py-3 px-8 justify-between mb-3">
