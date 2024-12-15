@@ -4,7 +4,7 @@ import { LuDownload } from "react-icons/lu";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react";
 function Cards({ data, reference }) {
-  const [status, setStatus] = useState("In Progress"); // Status
+  const [status, setStatus] = useState("Incomplete"); // Status
 
   const handleClick = (e) => {
     const parentDiv = e.target.parentElement; // Get the parent div
@@ -12,15 +12,15 @@ function Cards({ data, reference }) {
     let newColor;
 
     // Cycle through states: 
-    if (status === "In Progress") {
-      newStatus = "Complete";
-      newColor = "Green"; 
-    } else if (status === "Complete") {
-      newStatus = "Incomplete";
-      newColor = "Red";
-    } else {
+    if (status === "Incomplete") {
       newStatus = "In Progress";
       newColor = "Blue"; 
+    } else if (status === "In Progress") {
+      newStatus = "Complete";
+      newColor = "Green";
+    } else {
+      newStatus = "Incomplete";
+      newColor = "Red"; 
     }
 
     // Set the new status and background color
@@ -59,7 +59,7 @@ function Cards({ data, reference }) {
               className="w-full h-full text-center text-xl font-semibold"
               onClick={(e) => handleClick(e)}
             >
-              Incomplete
+              {status}
             </h3>
           </div>
         )}
