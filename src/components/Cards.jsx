@@ -3,10 +3,10 @@ import { FaTasks } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react";
-function Cards({reference, onDelete }) {
-
-  let desc = "Enter Text"
+function Cards({ reference, cards, onDelete }) {
   
+  let desc = "Enter Text";
+
   // Hooks ong
   const [status, setStatus] = useState("Incomplete");
   const [description, setDescription] = useState(desc);
@@ -42,7 +42,6 @@ function Cards({reference, onDelete }) {
     const parentDiv = e.target.parentElement; // Get the parent div
     let newStatus;
     let newColor;
-    
 
     // Cycle through states:
     if (status === "Incomplete") {
@@ -120,7 +119,7 @@ function Cards({reference, onDelete }) {
           </h5>
 
           <span
-            onClick={() => onDelete(data.id)}
+            onClick={() => onDelete(cards.id)}
             className="w-7 h-7 bg-zinc-600 rounded-full flex items-center justify-center "
           >
             <IoCloseSharp />
