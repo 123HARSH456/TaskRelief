@@ -3,10 +3,11 @@ import { FaTasks } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react";
-function Cards({ data, reference, onDelete }) {
+function Cards({reference, onDelete }) {
+  let desc = "Enter text";
   // Hooks ong
   const [status, setStatus] = useState("Incomplete");
-  const [description, setDescription] = useState(data.desc);
+  const [description, setDescription] = useState(desc);
   const [isEditing, setIsEditing] = useState(false);
   const descriptionRef = useRef(null);
 
@@ -39,6 +40,7 @@ function Cards({ data, reference, onDelete }) {
     const parentDiv = e.target.parentElement; // Get the parent div
     let newStatus;
     let newColor;
+    
 
     // Cycle through states:
     if (status === "Incomplete") {
@@ -107,7 +109,7 @@ function Cards({ data, reference, onDelete }) {
           textDecoration: isEditing ? "underline" : "none",
         }}
       >
-        {description || "Enter Your Tasks"}
+        {desc}
       </p>
       <div className="footer absolute bottom-0 w-full left-0">
         <div className="flex items-center py-3 px-8 justify-between mb-3">
