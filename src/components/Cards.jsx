@@ -4,23 +4,33 @@ import { LuDownload } from "react-icons/lu";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react";
 function Cards({ data, reference }) {
-  const [status, setStatus] = useState("Incomplete"); // Status
+  // Hooks ong
+  const [status, setStatus] = useState("Incomplete");
+  const [description, setDescription] = useState(data.desc);
+  const [isEditing, setIsEditing] = useState(false);
+
+
+  // Function to handle changes 
+  const handleDescriptionChange = (e) => {
+    const newDescription = e.target.innerText;
+    setDescription(newDescription);
+  };
 
   const handleClick = (e) => {
     const parentDiv = e.target.parentElement; // Get the parent div
     let newStatus;
     let newColor;
 
-    // Cycle through states: 
+    // Cycle through states:
     if (status === "Incomplete") {
       newStatus = "In Progress";
-      newColor = "Blue"; 
+      newColor = "Blue";
     } else if (status === "In Progress") {
       newStatus = "Complete";
       newColor = "Green";
     } else {
       newStatus = "Incomplete";
-      newColor = "Red"; 
+      newColor = "Red";
     }
 
     // Set the new status and background color
@@ -29,9 +39,33 @@ function Cards({ data, reference }) {
     e.target.textContent = newStatus;
   };
 
+
+  // Starts editing
+  const handleEditStart = () => {
+    setIsEditing(true);
+  };
+
+  // Stops editing
+  const handleEditEnd = () => {
+    setIsEditing(false);
+  };
+
+  // Handle key press event to remove edit mode when Enter is pressed
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      setIsEditing(false); // Exit edit mode
+      e.preventDefault(); // Prevent newline by Enter key
+    }
+  };
+
+  // Set edit mode when clicked
+  const handleEditMode = () => {
+    setIsEditing((prev) => !prev);
+  };
+
   return (
     <motion.div
-      drag
+      drag={!isEditing}
       dragConstraints={reference}
       whileDrag={{ scale: 1.1 }}
       dragElastic={0.9}
@@ -39,10 +73,27 @@ function Cards({ data, reference }) {
       className="relative flex-shrink-0 w-60 h-72 rounded-[45px] bg-zinc-900/90 text-white py-10 px-8 overflow-hidden"
     >
       <FaTasks />
-      <p className="text-sm leading-tight mt-5 font-semibold">{data.desc}</p>
+      <p
+        contentEditable={isEditing}
+        suppressContentEditableWarning={true}
+        onInput={handleDescriptionChange}
+        onFocus={handleEditStart} // Start editing
+        onBlur={handleEditEnd} // End editing
+        onKeyDown={handleKeyDown} // Enter key to exit edit mode
+        className="text-sm leading-tight mt-5 font-semibold"
+        style={{
+          padding: "5px",
+          minHeight: "50px",
+          cursor: "text",
+          textDecoration: isEditing ? "underline" : "none",
+        }}
+      >
+        {description}
+      </p>
       <div className="footer absolute bottom-0 w-full left-0">
         <div className="flex items-center py-3 px-8 justify-between mb-3">
-          <h5>{data.filesize}</h5>
+          <h5 className="bg-blue-900 p-0.5 rounded" onClick={handleEditMode}>Edit</h5>
+
           <span className="w-7 h-7 bg-zinc-600 rounded-full flex items-center justify-center ">
             {data.close ? (
               <IoCloseSharp />
@@ -52,9 +103,7 @@ function Cards({ data, reference }) {
           </span>
         </div>
         {data.tag.isOpen && (
-          <div
-            className="tag w-full py-3 px-3  flex items-center justify-center bg-[#fc0404]"
-          >
+          <div className="tag w-full py-3 px-3  flex items-center justify-center bg-[#fc0404]">
             <h3
               className="w-full h-full text-center text-xl font-semibold"
               onClick={(e) => handleClick(e)}
