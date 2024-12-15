@@ -116,7 +116,7 @@ function Cards({ data, reference, onDelete }) {
           </h5>
 
           <span
-            onClick={onDelete}
+            onClick={() => onDelete(data.id)}
             className="w-7 h-7 bg-zinc-600 rounded-full flex items-center justify-center "
           >
             <IoCloseSharp />
