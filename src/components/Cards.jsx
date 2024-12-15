@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTasks } from "react-icons/fa";
-
 import { LuDownload } from "react-icons/lu";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react";
 function Cards({ data, reference }) {
+  const [status, setStatus] = useState("In Progress"); // Status
+
+  const handleClick = (e) => {
+    const parentDiv = e.target.parentElement; // Get the parent div
+    let newStatus;
+    let newColor;
+
+    // Cycle through states: 
+    if (status === "In Progress") {
+      newStatus = "Complete";
+      newColor = "Green"; 
+    } else if (status === "Complete") {
+      newStatus = "Incomplete";
+      newColor = "Red";
+    } else {
+      newStatus = "In Progress";
+      newColor = "Blue"; 
+    }
+
+    // Set the new status and background color
+    setStatus(newStatus);
+    parentDiv.style.backgroundColor = newColor;
+    e.target.textContent = newStatus;
+  };
+
   return (
     <motion.div
       drag
@@ -29,15 +53,14 @@ function Cards({ data, reference }) {
         </div>
         {data.tag.isOpen && (
           <div
-            className={`tag w-full py-4 ${
-              data.tag.tagColor === "Blue"
-                ? "bg-blue-600"
-                : data.tag.tagColor === "Green"
-                ? "bg-green-600"
-                : "bg-red-600"
-            } flex items-center justify-center`}
+            className="tag w-full py-3 px-3  flex items-center justify-center bg-[#fc0404]"
           >
-            <h3 className="text-sm font-semibold">{data.tag.tagTitle}</h3>
+            <h3
+              className="w-full h-full text-center text-xl font-semibold"
+              onClick={(e) => handleClick(e)}
+            >
+              Incomplete
+            </h3>
           </div>
         )}
       </div>
