@@ -4,7 +4,9 @@ import { LuDownload } from "react-icons/lu";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react";
 function Cards({reference, onDelete }) {
-  let desc = "Enter text";
+
+  let desc = "Enter Text"
+  
   // Hooks ong
   const [status, setStatus] = useState("Incomplete");
   const [description, setDescription] = useState(desc);

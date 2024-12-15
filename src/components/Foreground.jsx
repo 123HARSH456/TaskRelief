@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import Cards from "./Cards";
 function Foreground() {
-  const ref = useRef(null);
 
   // const generateID = () => Date.now() + Math.random();
 
@@ -20,7 +19,7 @@ function Foreground() {
   //   { id: Date.now() + Math.random() },
   //   { id: Date.now() + Math.random() },
   // ]);
-  
+
   // Function to add a new card
   const addCard = () => {
     const newCard = { id: Date.now() + Math.random() }; // Create a new card with a unique id
@@ -29,12 +28,11 @@ function Foreground() {
 
   return (
     <div
-      ref={ref}
       className="fixed top-0 left-0 z-[3] w-full h-full flex gap-10 p-5 flex-wrap"
     >
-      <Cards reference={ref} />
-      <Cards reference={ref} />
-      <Cards reference={ref} />
+      <Cards />
+      <Cards />
+      <Cards />
     </div>
   );
 }
