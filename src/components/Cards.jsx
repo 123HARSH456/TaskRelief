@@ -3,6 +3,8 @@ import { FaTasks } from "react-icons/fa";
 import { LuDownload } from "react-icons/lu";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion } from "motion/react";
+import { FaRegEdit } from "react-icons/fa";
+
 function Cards({ reference, cards, onDelete }) {
   let desc = "Enter Text";
 
@@ -93,7 +95,7 @@ function Cards({ reference, cards, onDelete }) {
       whileDrag={{ scale: 1.1 }}
       dragElastic={0.9}
       dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
-      className="relative flex-shrink-0 w-60 h-72 rounded-[45px] bg-zinc-900/90 text-white py-10 px-8 overflow-hidden"
+      className="relative transition-all duration-300 ease-in-out flex-shrink-0 w-60 h-72 rounded-[45px] bg-zinc-900/90 text-white py-10 px-8 overflow-hidden"
     >
       <FaTasks />
       <p
@@ -117,7 +119,7 @@ function Cards({ reference, cards, onDelete }) {
       <div className="footer absolute bottom-0 w-full left-0">
         <div className="flex items-center py-3 px-8 justify-between mb-3">
           <h5 className="bg-blue-900 p-0.5 rounded" onClick={handleEditMode}>
-            Edit
+            <FaRegEdit />
           </h5>
 
           <span
